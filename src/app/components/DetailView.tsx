@@ -1,11 +1,11 @@
 "use client";
 
-import { Shrink } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, Area, ComposedChart } from "recharts";
 import { MONTHS, jsonData } from "@/data/mock";
+import { KpiCard } from "./KpiCard";
 import { useLiveSeries } from "@/hooks/useLiveSeries";
 import type { MonthlyPoint } from "@/types";
-import { KpiCard } from "./KpiCard";
 
 export function DetailView({ onBack, sectionTitle }: { onBack: () => void; sectionTitle: string }) {
   const initial: MonthlyPoint[] = MONTHS.map((m, i) => ({
@@ -27,76 +27,162 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
   ];
 
   return (
-    <div className="fixed inset-0 z-50 p-4 sm:p-6 md:p-8 bg-white dark:bg-neutral-900 overflow-y-auto">
+    <div className="fixed inset-0 z-50 p-4 sm:p-6 md:p-8 bg-white !bg-white overflow-y-auto" style={{ backgroundColor: 'white' }}>
       <div className="max-w-[1400px] mx-auto">
         <div className="flex items-center justify-between mb-4">
           <div className="text-base font-semibold">Regional spend</div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-          {jsonData.kpis.map((k) => (
-            <KpiCard key={k.label} label={k.label} value={k.value} sub={k.sub} type={k.type} />
-          ))}
-        </div>
+        {/* KPI Section */}
+        <section className="mb-6">
+          <div className="relative flex bg-white border border-gray-200 shadow-sm">
+            {/* Left Navigation Arrow */}
+            <div className="flex items-center">
+              <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 border-r border-gray-200 hover:bg-gray-50">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 15 6 L 9 12 L 15 18" />
+                </svg>
+              </button>
+            </div>
+            
+            {/* KPI Cards */}
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+              <div className="group">
+                <div className="relative">
+                  <KpiCard 
+                    label="Total spend" 
+                    value="10.9M" 
+                    sub="8.9M (+2M)" 
+                    type="total-spend"
+                  />
+                </div>
+              </div>
+              <div className="group">
+                <div className="relative">
+                  <div className="absolute left-0 top-[20px] bottom-[20px] border-l border-gray-200 group-hover:opacity-0 transition-opacity duration-200" />
+                  <KpiCard 
+                    label="Category volatility" 
+                    value="32%" 
+                    sub="28% (+4%)" 
+                    type="misc"
+                  />
+                </div>
+              </div>
+              <div className="group">
+                <div className="relative">
+                  <div className="absolute left-0 top-[20px] bottom-[20px] border-l border-gray-200 group-hover:opacity-0 transition-opacity duration-200" />
+                  <KpiCard 
+                    label="Spend link to indexes" 
+                    value="7.07M" 
+                    sub="6.5M (+0.57M)" 
+                    type="transactions"
+                  />
+                </div>
+              </div>
+              <div className="group">
+                <div className="relative">
+                  <div className="absolute left-0 top-[20px] bottom-[20px] border-l border-gray-200 group-hover:opacity-0 transition-opacity duration-200" />
+                  <KpiCard 
+                    label="Regional efficiency" 
+                    value="89%" 
+                    sub="85% (+4%)" 
+                    type="po"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Navigation Arrow */}
+            <div className="flex items-center">
+              <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 border-l border-gray-200 hover:bg-gray-50">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 9 6 L 15 12 L 9 18" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
 
         <div className="flex items-center justify-between mb-4">
-          <button onClick={onBack} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border hover:bg-black/5 dark:hover:bg-white/5 text-sm font-medium">
-            <Shrink size={16} /> Back
+          <button onClick={onBack} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700">
+            <ArrowLeft size={16} /> Back
           </button>
-          <button className="px-3 py-1.5 rounded-md border text-sm font-medium">{sectionTitle} data</button>
+          <button className="px-3 py-1.5 rounded-md bg-blue-600 text-white text-sm font-medium hover:bg-blue-700">{sectionTitle} data</button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Section - KPIs and Horizontal Bar Chart */}
           <div className="space-y-6">
-            {/* KPI Metrics */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="rounded-xl border p-4">
-                <div className="text-sm font-medium text-gray-500 mb-2">Total spend</div>
-                <div className="text-2xl font-bold">10.9M</div>
-              </div>
-              <div className="rounded-xl border p-4">
-                <div className="text-sm font-medium text-gray-500 mb-2">Category volatility</div>
-                <div className="text-2xl font-bold">32%</div>
-              </div>
-              <div className="rounded-xl border p-4">
-                <div className="text-sm font-medium text-gray-500 mb-2">Spend link to indexes</div>
-                <div className="text-2xl font-bold">7.07M</div>
-              </div>
-            </div>
+
 
             {/* Horizontal Bar Chart */}
-            <div className="rounded-xl border p-4">
+            <div className="border p-4">
               <div className="text-sm font-medium mb-4">Spend by top 10 supplier influencing your portfolio:</div>
               
               {/* Segmented Horizontal Bar */}
               <div className="mb-4">
-                <div className="flex h-8 bg-gray-200 rounded-full overflow-hidden">
-                  <div className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium" style={{ width: '32%' }}>
+                <div className="flex h-8 bg-gray-200 overflow-hidden">
+                  <div 
+                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '32%' }}
+                    title="SKF - 32% of total spend"
+                  >
                     32%
                   </div>
-                  <div className="h-full bg-[#3b82f6] flex items-center justify-center text-white text-xs font-medium" style={{ width: '26%' }}>
+                  <div 
+                    className="h-full bg-sky-400 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '26%' }}
+                    title="SKF - 26% of total spend"
+                  >
                     26%
                   </div>
-                  <div className="h-full bg-[#06b6d4] flex items-center justify-center text-white text-xs font-medium" style={{ width: '14%' }}>
+                  <div 
+                    className="h-full bg-sky-300 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '14%' }}
+                    title="SKF - 14% of total spend"
+                  >
                     14%
                   </div>
-                  <div className="h-full bg-[#0891b2] flex items-center justify-center text-white text-xs font-medium" style={{ width: '11%' }}>
+                  <div 
+                    className="h-full bg-sky-500 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '11%' }}
+                    title="SKF - 11% of total spend"
+                  >
                     11%
                   </div>
-                  <div className="h-full bg-[#0d9488] flex items-center justify-center text-white text-xs font-medium" style={{ width: '7%' }}>
+                  <div 
+                    className="h-full bg-sky-600 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '7%' }}
+                    title="SKF - 7% of total spend"
+                  >
                     7%
                   </div>
-                  <div className="h-full bg-[#1e40af] flex items-center justify-center text-white text-xs font-medium" style={{ width: '4%' }}>
+                  <div 
+                    className="h-full bg-sky-700 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '4%' }}
+                    title="SKF - 4% of total spend"
+                  >
                     4%
                   </div>
-                  <div className="h-full bg-[#7dd3fc] flex items-center justify-center text-white text-xs font-medium" style={{ width: '3%' }}>
+                  <div 
+                    className="h-full bg-sky-200 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '3%' }}
+                    title="SKF - 3% of total spend"
+                  >
                     3%
                   </div>
-                  <div className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium" style={{ width: '2%' }}>
+                  <div 
+                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '2%' }}
+                    title="SKF - 2% of total spend"
+                  >
                     2%
                   </div>
-                  <div className="h-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs font-medium" style={{ width: '1%' }}>
+                  <div 
+                    className="h-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    style={{ width: '1%' }}
+                    title="SKF - 1% of total spend"
+                  >
                     1%
                   </div>
                 </div>
@@ -109,27 +195,27 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#3b82f6]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-400"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#06b6d4]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-300"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#0891b2]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-500"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#0d9488]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-600"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#1e40af]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-700"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#7dd3fc]"></div>
+                  <div className="w-3 h-3 rounded-full bg-sky-200"></div>
                   <span className="text-sm text-gray-600">SKF</span>
                 </div>
                 <div className="flex items-center gap-2">

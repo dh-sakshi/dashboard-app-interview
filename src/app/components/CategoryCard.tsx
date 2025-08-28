@@ -28,7 +28,7 @@ export function CategoryCard({
               <span className="text-[13px] font-medium text-gray-900">{title}</span>
             </div>
             <div className="flex items-center gap-1 text-gray-400">
-              <button onClick={onExpand} className="p-0.5 hover:text-gray-600" aria-label="Expand">
+              <button onClick={onExpand} className="p-0.5 hover:text-gray-600 cursor-pointer" aria-label="Expand">
                 <Expand size={14} />
               </button>
               <button className="p-0.5 hover:text-gray-600" aria-label="More actions">
@@ -38,21 +38,21 @@ export function CategoryCard({
           </div>
           
           {/* Subtitle */}
-          <div className="text-[11px] text-gray-500 mb-2">Plants by key levers and impact</div>
+          <div className="text-[11px] text-black font-bold mb-2">Plants by key levers and impact</div>
           
           {/* KPI Metrics */}
-          <div className="grid grid-cols-3 gap-x-1 mb-4">
-            <div>
-              <div className="text-[10px] text-gray-500 mb-0.5 whitespace-nowrap">Regional spend</div>
-              <div className="text-[12px] font-medium text-gray-900">12.3M</div>
+          <div className="flex justify-between mb-4">
+            <div className="text-center flex-1">
+              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">Regional spend</div>
+              <div className="text-[11px] font-medium text-gray-900">12.3M</div>
             </div>
-            <div>
-              <div className="text-[10px] text-gray-500 mb-0.5 whitespace-nowrap">On time delivery rate</div>
-              <div className="text-[12px] font-medium text-gray-900">46.8%</div>
+            <div className="text-center flex-1">
+              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">On time delivery rate</div>
+              <div className="text-[11px] font-medium text-gray-900">46.8%</div>
             </div>
-            <div>
-              <div className="text-[10px] text-gray-500 mb-0.5 whitespace-nowrap">Contract compliance</div>
-              <div className="text-[12px] font-medium text-gray-900">21 days</div>
+            <div className="text-center flex-1">
+              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">Contract compliance</div>
+              <div className="text-[11px] font-medium text-gray-900">21 days</div>
             </div>
           </div>
           
@@ -80,8 +80,18 @@ export function CategoryCard({
                     tickFormatter={(value) => `${value}K`}
                     interval={0}
                   />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'white', 
+                      border: '1px solid #e5e7eb',
+                      borderRadius: '6px',
+                      fontSize: '14px'
+                    }}
+                    formatter={(value, name) => [`${value}K`, name]}
+                    labelFormatter={(label) => `Period ${label}`}
+                  />
                   <ReferenceLine y={220} stroke="#e5e7eb" strokeDasharray="3 3" />
-                  <Bar dataKey="a" fill="#60a5fa" name="Consumables" radius={0} stackId="stack" />
+                  <Bar dataKey="a" fill="#38bdf8" name="Consumables" radius={0} stackId="stack" />
                   <Bar dataKey="b" fill="#1e293b" name="Non-consumables" radius={0} stackId="stack" />
                 </BarChart>
               </ResponsiveContainer>
@@ -91,15 +101,15 @@ export function CategoryCard({
             <div>
               <div className="flex items-center gap-3 text-[9px] mb-0.5">
                 <div className="flex items-center gap-1">
-                  <div className="w-2 h-2 bg-blue-400"></div>
+                  <div className="w-2 h-2 bg-sky-400"></div>
                   <span className="text-gray-600">Consumables</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <div className="w-2 h-2 bg-gray-900"></div>
                   <span className="text-gray-600">Non-consumables</span>
                 </div>
+                <span className="text-[9px] text-gray-500 ml-2">Spend, (USD)</span>
               </div>
-              <div className="text-[9px] text-gray-500">Spend, (USD)</div>
             </div>
           </div>
         </div>
