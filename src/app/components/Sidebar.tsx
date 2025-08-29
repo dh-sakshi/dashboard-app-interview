@@ -13,8 +13,7 @@ import {
   Search, 
   BarChart3, 
   Cloud, 
-  Sparkles, 
-  User
+  Sparkles
 } from 'lucide-react';
 
 export default function Sidebar() {
