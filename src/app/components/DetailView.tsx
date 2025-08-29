@@ -81,93 +81,93 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
         {/* Left Section - Horizontal Bar Chart */}
         <div className="space-y-6">
                       {/* Horizontal Bar Chart */}
-            <div className="bg-white p-4 flex flex-col min-h-80">
-              <div className="grid grid-cols-3 gap-10 pb-1 mb-0 mt-[4px] text-left">
+            <div className="bg-white p-4 flex flex-col min-h-70">
+              <div className="grid grid-cols-3 gap-2 pb-4 mb-6 bg-red-100">
                 {/* Total Spend */}
                 <div className="text-left">
-                  <p className="text-[10px] text-gray-500 mb-0">Total spend</p>
+                  <p className="text-[10px] text-gray-500 mb-0.5">Total spend</p>
                   <p className="text-base font-semibold text-gray-900">10.9M</p>
                 </div>
 
                 {/* Category Volatility */}
-                <div className="pl-4 border-l border-gray-200 text-left">
-                  <p className="text-[10px] text-gray-500 mb-0">Category volatility</p>
+                <div className="text-left border-l border-gray-200 pl-2">
+                  <p className="text-[10px] text-gray-500 mb-0.5">Category volatility</p>
                   <p className="text-base font-semibold text-gray-900">32%</p>
                 </div>
 
                 {/* Spend Link to Indexes */}
-                <div className="pl-4 border-l border-gray-200 text-left">
-                  <p className="text-[10px] text-gray-500 mb-0">Spend link to indexes</p>
+                <div className="text-left border-l border-gray-200 pl-2">
+                  <p className="text-[10px] text-gray-500 mb-0.5">Spend link to indexes</p>
                   <p className="text-base font-semibold text-gray-900">7.07M</p>
                 </div>
               </div>
               <div className="flex-1" />
-              <div className="text-sm font-medium mb-4">Spend by top 10 supplier influencing your portfolio:</div>
+              <div className="text-sm font-medium mb-4">Spend by top 10 suppliers influencing your portfolio:</div>
               
               {/* Segmented Horizontal Bar */}
               <div className="mb-4">
                 <div className="flex h-8 bg-gray-200 overflow-hidden">
                   <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0s_forwards] opacity-0" 
-                    style={{ width: '32%', background: '#0f2a7a' }}
-                    title="SKF - 32% of total spend"
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0s_forwards] opacity-0" 
+                    style={{ width: '22%', background: '#0f2a7a' }}
+                    title="SKF - 22% of total spend"
                   >
-                    32%
+                    22%
                   </div>
                   <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.1s_forwards] opacity-0" 
-                    style={{ width: '26%', background: '#2d5bff' }}
-                    title="SKF - 26% of total spend"
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.1s_forwards] opacity-0" 
+                    style={{ width: '18%', background: '#2d5bff' }}
+                    title="SKF - 18% of total spend"
                   >
-                    26%
+                    18%
                   </div>
                   <div 
-                    className="h-full flex items-center justify-center text-gray-800 text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.2s_forwards] opacity-0" 
-                    style={{ width: '14%', background: '#a7e9f0' }}
+                    className="h-full flex items-center justify-end pr-1 text-gray-800 text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.2s_forwards] opacity-0" 
+                    style={{ width: '16%', background: '#a7e9f0' }}
+                    title="SKF - 16% of total spend"
+                  >
+                    16%
+                  </div>
+                  <div 
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.3s_forwards] opacity-0" 
+                    style={{ width: '14%', background: '#2958ff' }}
                     title="SKF - 14% of total spend"
                   >
                     14%
                   </div>
                   <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.3s_forwards] opacity-0" 
-                    style={{ width: '11%', background: '#2958ff' }}
-                    title="SKF - 11% of total spend"
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.4s_forwards] opacity-0" 
+                    style={{ width: '12%', background: '#d6e6ff' }}
+                    title="SKF - 12% of total spend"
                   >
-                    11%
+                    12%
                   </div>
                   <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.4s_forwards] opacity-0" 
-                    style={{ width: '7%', background: '#14b8a6' }}
-                    title="SKF - 7% of total spend"
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.5s_forwards] opacity-0" 
+                    style={{ width: '8%', background: '#1a3aa9' }}
+                    title="SKF - 8% of total spend"
                   >
-                    7%
+                    8%
                   </div>
                   <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.5s_forwards] opacity-0" 
-                    style={{ width: '4%', background: '#1a3aa9' }}
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.6s_forwards] opacity-0" 
+                    style={{ width: '6%', background: '#14b8a6' }}
+                    title="SKF - 6% of total spend"
+                  >
+                    6%
+                  </div>
+                  <div 
+                    className="h-full flex items-center justify-end pr-1 text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.7s_forwards] opacity-0" 
+                    style={{ width: '4%', background: '#243c8a' }}
                     title="SKF - 4% of total spend"
                   >
                     4%
-                  </div>
-                  <div 
-                    className="h-full flex items-center justify-center text-gray-700 text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.6s_forwards] opacity-0" 
-                    style={{ width: '3%', background: '#d6e6ff' }}
-                    title="SKF - 3% of total spend"
-                  >
-                    3%
-                  </div>
-                  <div 
-                    className="h-full flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.7s_forwards] opacity-0" 
-                    style={{ width: '2%', background: '#243c8a' }}
-                    title="SKF - 2% of total spend"
-                  >
-                    2%
                   </div>
                 </div>
               </div>
 
             {/* Legend */}
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap gap-4 justify-start">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full" style={{background:'#0f2a7a'}}></div>
                 <span className="text-sm text-gray-600">SKF</span>
@@ -205,9 +205,9 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
         </div>
 
         {/* Right Section - Market Mix Index Line Chart */}
-        <div className="bg-white p-4 min-h-72">
+        <div className="bg-white p-4 min-h-60">
           <div className="text-sm font-medium mb-4">Market mix index</div>
-          <div className="h-56">
+          <div className="h-54">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={series} margin={{ top: 10, right: 8, left: 0, bottom: 28 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
@@ -217,8 +217,8 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
                   tick={{ fontSize: 12 }}
                   axisLine={{ stroke:'#e5e7eb' }}
                   tickLine={false}
-                  domain={[50, 250]}
-                  ticks={[50, 100, 150, 200, 250]}
+                  domain={[40, 250]}
+                  ticks={[40, 80, 120, 160, 200, 250]}
                   tickFormatter={(v) => `${v}%`}
                 />
                 <Tooltip formatter={(v: any) => [`${v}%`, '']} />
