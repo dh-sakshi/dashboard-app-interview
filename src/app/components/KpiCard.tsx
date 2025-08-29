@@ -3,7 +3,7 @@
 import { type ComponentType } from "react";
 import { LineChart, FileText, ShoppingCart, BarChart2, Info } from "lucide-react";
 
-const icons: Record<string, ComponentType<any>> = {
+const icons: Record<string, ComponentType<{ className?: string; strokeWidth?: number }>> = {
   "total-spend": LineChart,
   "transactions": FileText,
   "po": ShoppingCart,

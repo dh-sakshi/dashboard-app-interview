@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { CategoryCard } from "./CategoryCard";
-import { jsonData, categoryBarSeriesByCategory } from "@/data/mock";
-import type { CategoryBarPoint } from "@/types";
+import { jsonData, categoryBarSeriesByCategory, categoryHeaderKpis } from "@/data/mock";
+import type { CategoryBarPoint, HeaderItem } from "@/data/mock";
 
 interface CategorySectionProps {
   categoryData: CategoryBarPoint[];
-  categoryHeaderKpis: Record<string, any>;
+  categoryHeaderKpis: Record<string, HeaderItem[]>;
   onExpand: (category: string) => void;
 }
 
@@ -14,7 +14,7 @@ export function CategorySection({ categoryData, categoryHeaderKpis, onExpand }: 
     <section>
       {/* Mobile Layout - Vertical Stack */}
       <div className="block sm:hidden flex flex-col space-y-4">
-        {jsonData.categories.map((c: string, idx: number) => (
+        {jsonData.categories.map((c: string) => (
           <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
             <CategoryCard 
               title={c} 
@@ -28,7 +28,7 @@ export function CategorySection({ categoryData, categoryHeaderKpis, onExpand }: 
       
       {/* Desktop Layout - Grid */}
       <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {jsonData.categories.map((c: string, idx: number) => (
+        {jsonData.categories.map((c: string) => (
           <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
             <CategoryCard 
               title={c} 

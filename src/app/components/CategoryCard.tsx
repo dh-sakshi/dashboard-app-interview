@@ -1,7 +1,7 @@
 "use client";
 
 import { Expand, MoreHorizontal } from "lucide-react";
-import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ReferenceLine } from "recharts";
+import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Bar, ReferenceLine } from "recharts";
 import type { CategoryBarPoint } from "@/types";
 import type { HeaderItem } from "@/data/mock";
 
