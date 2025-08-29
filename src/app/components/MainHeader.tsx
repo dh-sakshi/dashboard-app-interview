@@ -9,7 +9,7 @@ export default function MainHeader() {
           </h1>
 
           {/* Right */}
-          <button className="flex items-center gap-2 bg-[#0094FF] hover:bg-[#0080E6] text-white text-sm font-medium px-4 py-2 rounded-md shadow-sm">
+          <button className="flex items-center gap-2 bg-[#0094FF] hover:bg-[#0080E6] text-white text-sm font-medium px-4 py-2 shadow-sm">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
