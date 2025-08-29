@@ -21,7 +21,7 @@ export function CategoryCard({
         <div className="absolute inset-0 bg-gray-50/80 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" />
         
         {/* Content */}
-        <div className="relative z-10 bg-white p-3 h-[400px] flex flex-col">
+        <div className="relative z-10 bg-white p-3 h-[300px] sm:h-[400px] flex flex-col">
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-1.5">
               <span className="inline-flex h-5 w-5 items-center justify-center text-[13px]">📄</span>
