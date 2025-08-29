@@ -1,12 +1,14 @@
 export default function DashboardHeader() {
   return (
-    <div className="border-b-2 border-gray-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 bg-gray-100">
+    <div>
+      <div className="w-full pl-5 pr-4 py-3 pb-2">
+        <div className="bg-white rounded-none">
+          <div className="px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Left Tabs */}
           <div className="flex items-center space-x-6">
             {/* Active Tab */}
-            <button className="flex items-center text-[#0094FF] font-medium text-sm border-b-2 border-[#0094FF] pb-2">
+            <button className="flex items-center text-[#0094FF] font-medium text-sm border-b-2 border-[#0094FF] pb-1.5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4 mr-1"
@@ -101,6 +103,8 @@ export default function DashboardHeader() {
               </svg>
               Create your dashboard
             </button>
+          </div>
+        </div>
           </div>
         </div>
       </div>

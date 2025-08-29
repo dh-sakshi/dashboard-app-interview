@@ -7,6 +7,7 @@ import { CategoryCard } from "./components/CategoryCard";
 import { KpiCard } from "./components/KpiCard";
 import DashboardHeader from "./components/DashboardHeader";
 import MainHeader from "./components/MainHeader";
+import Sidebar from "./components/Sidebar";
 import { jsonData, Kpi } from "@/data/mock";
 import type { CategoryBarPoint } from "@/types";
 
@@ -28,18 +29,31 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* Header */}
-      <MainHeader />
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Left Column - Logo + Sidebar */}
+      <div className="flex flex-col">
+        {/* Application Logo */}
+        <div className="w-16 h-16 bg-white flex items-center justify-center">
+          <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+        </div>
+        
+        {/* Sidebar */}
+        <Sidebar />
+      </div>
 
-      {/* Navigation and Filter Bar */}
-      <DashboardHeader />
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <MainHeader />
 
-      {/* Main Content */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-        {/* KPI Section */}
+        {/* Navigation and Filter Bar */}
+        <DashboardHeader />
+
+        {/* Main Content */}
+        <main className="flex-1 w-full pl-5 pr-4 py-2 sm:py-4">
+          {/* KPI Section */}
         <section className="mb-6">
-          <div className="relative flex bg-white border-2 border-gray-300">
+          <div className="relative flex bg-white border border-gray-200 shadow-sm">
             {/* Left Navigation Arrow */}
             <div className="flex items-center">
               <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 border-r border-gray-200 hover:bg-gray-50">
@@ -95,7 +109,7 @@ export default function Dashboard() {
         {/* Category Cards Section */}
         <section>
           {/* Mobile Layout - Vertical Stack */}
-          <div className="block sm:hidden flex flex-col space-y-4 bg-gray-50 p-4">
+          <div className="block sm:hidden flex flex-col space-y-4">
             {jsonData.categories.map((c: string, idx: number) => (
               <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                 <CategoryCard 
@@ -108,7 +122,7 @@ export default function Dashboard() {
           </div>
           
           {/* Desktop Layout - Grid */}
-          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 bg-gray-50 p-4">
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {jsonData.categories.map((c: string, idx: number) => (
               <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                 <CategoryCard 
@@ -121,6 +135,7 @@ export default function Dashboard() {
           </div>
         </section>
       </main>
+        </div>
 
       {/* Detail View Modal */}
       <AnimatePresence>

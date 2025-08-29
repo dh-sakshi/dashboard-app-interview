@@ -14,7 +14,7 @@ export function CategoryCard({
   data: CategoryBarPoint[];
 }) {
   return (
-    <div className="relative group cursor-pointer">
+    <div className="relative group cursor-pointer shadow-sm">
       {/* Scale container */}
       <div className="absolute inset-0 origin-center transition-transform duration-200 ease-out group-hover:scale-[1.02]">
         {/* Hover highlight effect */}
@@ -61,7 +61,7 @@ export function CategoryCard({
             {/* Chart */}
             <div className="flex-1 min-h-0">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data} barSize={12} barGap={0} margin={{ top: 10, right: 10, bottom: 20, left: 10 }}>
+                <BarChart data={data} barSize={12} barGap={0} margin={{ top: 10, right: 10, bottom: 20, left: 20 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
                   <XAxis 
                     dataKey="label" 
@@ -72,13 +72,14 @@ export function CategoryCard({
                   />
                   <YAxis 
                     stroke="#9ca3af"
-                    fontSize={9}
+                    fontSize={8}
                     tickLine={false}
                     axisLine={{ stroke: '#e5e7eb' }}
                     domain={[0, 250]} 
                     ticks={[0, 50, 100, 150, 200, 250]}
                     tickFormatter={(value) => `${value}K`}
                     interval={0}
+                    width={35}
                   />
                   <Tooltip 
                     contentStyle={{ 

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { ArrowLeft } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, BarChart, Bar, Area, ComposedChart } from "recharts";
 import { MONTHS, jsonData } from "@/data/mock";
@@ -8,6 +9,27 @@ import { useLiveSeries } from "@/hooks/useLiveSeries";
 import type { MonthlyPoint } from "@/types";
 
 export function DetailView({ onBack, sectionTitle }: { onBack: () => void; sectionTitle: string }) {
+  // CSS keyframes for chart animation
+  React.useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
   const initial: MonthlyPoint[] = MONTHS.map((m, i) => ({
     month: m,
     value: 80 + Math.round(Math.sin(i / 2) * 30 + Math.random() * 10),
@@ -123,63 +145,63 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
               <div className="mb-4">
                 <div className="flex h-8 bg-gray-200 overflow-hidden">
                   <div 
-                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0s_forwards] opacity-0" 
                     style={{ width: '32%' }}
                     title="SKF - 32% of total spend"
                   >
                     32%
                   </div>
                   <div 
-                    className="h-full bg-sky-400 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-400 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.1s_forwards] opacity-0" 
                     style={{ width: '26%' }}
                     title="SKF - 26% of total spend"
                   >
                     26%
                   </div>
                   <div 
-                    className="h-full bg-sky-300 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-300 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.2s_forwards] opacity-0" 
                     style={{ width: '14%' }}
                     title="SKF - 14% of total spend"
                   >
                     14%
                   </div>
                   <div 
-                    className="h-full bg-sky-500 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-500 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.3s_forwards] opacity-0" 
                     style={{ width: '11%' }}
                     title="SKF - 11% of total spend"
                   >
                     11%
                   </div>
                   <div 
-                    className="h-full bg-sky-600 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-600 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.4s_forwards] opacity-0" 
                     style={{ width: '7%' }}
                     title="SKF - 7% of total spend"
                   >
                     7%
                   </div>
                   <div 
-                    className="h-full bg-sky-700 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-700 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.5s_forwards] opacity-0" 
                     style={{ width: '4%' }}
                     title="SKF - 4% of total spend"
                   >
                     4%
                   </div>
                   <div 
-                    className="h-full bg-sky-200 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-sky-200 flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.6s_forwards] opacity-0" 
                     style={{ width: '3%' }}
                     title="SKF - 3% of total spend"
                   >
                     3%
                   </div>
                   <div 
-                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-[#1e3a8a] flex items-center justify-center text-white text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.7s_forwards] opacity-0" 
                     style={{ width: '2%' }}
                     title="SKF - 2% of total spend"
                   >
                     2%
                   </div>
                   <div 
-                    className="h-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs font-medium cursor-pointer hover:opacity-80 transition-opacity" 
+                    className="h-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs font-medium cursor-pointer hover:opacity-80 transition-all duration-1000 ease-out animate-[slideIn_1s_ease-out_0.8s_forwards] opacity-0" 
                     style={{ width: '1%' }}
                     title="SKF - 1% of total spend"
                   >
