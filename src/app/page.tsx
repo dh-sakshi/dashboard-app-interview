@@ -8,7 +8,7 @@ import { KpiCard } from "./components/KpiCard";
 import DashboardHeader from "./components/DashboardHeader";
 import MainHeader from "./components/MainHeader";
 import Sidebar from "./components/Sidebar";
-import { jsonData, Kpi } from "@/data/mock";
+import { jsonData, Kpi, categoryBarSeriesByCategory, categoryHeaderKpis, categorySpecificKpis } from "@/data/mock";
 import type { CategoryBarPoint } from "@/types";
 
 export default function Dashboard() {
@@ -19,49 +19,13 @@ export default function Dashboard() {
   
   // Function to update KPI values when category is expanded
   const updateKpiValues = (categoryTitle: string) => {
-    const updatedKpis = jsonData.kpis.map(kpi => {
-      switch (kpi.type) {
-        case 'total-spend':
-          if (categoryTitle === 'Regional spend') {
-            return { ...kpi, value: '10.9M', sub: 'Prior year: 8.9M +2M ▲ 2.67% YOY' };
-          } else if (categoryTitle === 'Market') {
-            return { ...kpi, value: '15.2M', sub: 'Prior year: 12.1M +3.1M ▲ 3.45% YOY' };
-          } else if (categoryTitle === 'Suppliers') {
-            return { ...kpi, value: '8.7M', sub: 'Prior year: 7.2M +1.5M ▲ 1.89% YOY' };
-          }
-          return { ...kpi, value: '15.2M', sub: '12.1M (+3.1M)' };
-        case 'misc':
-          if (categoryTitle === 'Regional spend') {
-            return { ...kpi, value: '32%', sub: 'Prior year: 28%' };
-          } else if (categoryTitle === 'Market') {
-            return { ...kpi, value: '28%', sub: 'Prior year: 25%' };
-          } else if (categoryTitle === 'Suppliers') {
-            return { ...kpi, value: '35%', sub: 'Prior year: 31%' };
-          }
-          return { ...kpi, value: '28%', sub: '25% (+3%)' };
-        case 'transactions':
-          if (categoryTitle === 'Regional spend') {
-            return { ...kpi, value: '7.07M', sub: 'Prior year: 6.5M +0.57M ▲ 2.67% YOY' };
-          } else if (categoryTitle === 'Market') {
-            return { ...kpi, value: '8.45M', sub: 'Prior year: 7.8M +0.65M ▲ 3.12% YOY' };
-          } else if (categoryTitle === 'Suppliers') {
-            return { ...kpi, value: '6.2M', sub: 'Prior year: 5.8M +0.4M ▲ 1.95% YOY' };
-          }
-          return { ...kpi, value: '8.45M', sub: '7.8M (+0.65M)' };
-        case 'po':
-          if (categoryTitle === 'Regional spend') {
-            return { ...kpi, value: '89%', sub: 'Prior year: 85%' };
-          } else if (categoryTitle === 'Market') {
-            return { ...kpi, value: '92%', sub: 'Prior year: 88%' };
-          } else if (categoryTitle === 'Suppliers') {
-            return { ...kpi, value: '87%', sub: 'Prior year: 83%' };
-          }
-          return { ...kpi, value: '92%', sub: '88% (+4%)' };
-        default:
-          return kpi;
-      }
-    });
-    setDynamicKpis(updatedKpis);
+    // Use category-specific KPI data if available, otherwise fall back to default
+    if (categorySpecificKpis[categoryTitle]) {
+      setDynamicKpis(categorySpecificKpis[categoryTitle]);
+    } else {
+      // Fallback to default KPI data
+      setDynamicKpis(jsonData.kpis);
+    }
   };
   
   // Function to reset KPI values when going back
@@ -69,19 +33,7 @@ export default function Dashboard() {
     setDynamicKpis(jsonData.kpis);
   };
 
-  const categoryData: CategoryBarPoint[] = useMemo(
-    () => [
-      { label: "01", a: 130, b: 120 }, // Total: 250K
-      { label: "02", a: 60, b: 55 },   // Total: 115K
-      { label: "03", a: 70, b: 65 },   // Total: 135K
-      { label: "04", a: 50, b: 45 },   // Total: 95K
-      { label: "05", a: 65, b: 60 },   // Total: 125K
-      { label: "06", a: 45, b: 40 },   // Total: 85K
-      { label: "07", a: 55, b: 50 },   // Total: 105K
-      { label: "08", a: 70, b: 65 },   // Total: 135K
-    ],
-    []
-  );
+  const categoryData: CategoryBarPoint[] = useMemo(() => categoryBarSeriesByCategory.Plants, []);
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -119,11 +71,13 @@ export default function Dashboard() {
             <div className="relative flex bg-white border border-gray-200 shadow-sm">
               {/* Left Navigation Arrow */}
               <div className="flex items-center">
-                <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 border-r border-gray-200 hover:bg-gray-50">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M 15 6 L 9 12 L 15 18" />
-                  </svg>
+                <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-50">
                 </button>
+              </div>
+              <div className="w-5 h-5 border border-gray-200 bg-white rounded flex items-center justify-center absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2.5 z-10">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 15 18 L 9 12 L 15 6" />
+                </svg>
               </div>
               
               {/* KPI Cards */}
@@ -141,6 +95,7 @@ export default function Dashboard() {
                         type={k.type}
                         extraText={k.extraText}
                         isActive={index === 0}
+                        variant={expanded.isOpen ? "detail" : "default"}
                       />
                     </div>
                   </div>
@@ -149,11 +104,13 @@ export default function Dashboard() {
               
               {/* Right Navigation Arrow */}
               <div className="flex items-center">
-                <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 border-l border-gray-200 hover:bg-gray-50">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M 9 6 L 15 12 L 9 18" />
-                  </svg>
+                <button className="h-[104px] w-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-50">
                 </button>
+              </div>
+              <div className="w-5 h-5 border border-gray-200 bg-white rounded flex items-center justify-center absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2.5 z-10">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M 9 18 L 15 12 L 9 6" />
+                </svg>
               </div>
             </div>
           </section>
@@ -189,7 +146,8 @@ export default function Dashboard() {
                     <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                       <CategoryCard 
                         title={c} 
-                        data={categoryData} 
+                        data={categoryBarSeriesByCategory[c] || categoryData} 
+                        header={categoryHeaderKpis[c]}
                         onExpand={() => {
                           setExpanded({ isOpen: true, title: c });
                           updateKpiValues(c);
@@ -205,7 +163,8 @@ export default function Dashboard() {
                     <motion.div key={c} layout className="w-full" transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                       <CategoryCard 
                         title={c} 
-                        data={categoryData} 
+                        data={categoryBarSeriesByCategory[c] || categoryData} 
+                        header={categoryHeaderKpis[c]}
                         onExpand={() => {
                           setExpanded({ isOpen: true, title: c });
                           updateKpiValues(c);

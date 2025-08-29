@@ -19,7 +19,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <div className="flex flex-col items-center justify-between h-screen w-16 bg-white">
+    <div className="flex flex-col items-center justify-between h-screen w-16 bg-white border-r border-gray-200">
       {/* Top Section */}
       <div className="flex flex-col items-center space-y-6">
         {/* Separator above Home */}

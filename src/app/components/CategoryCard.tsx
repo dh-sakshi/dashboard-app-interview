@@ -3,15 +3,18 @@
 import { Expand, MoreHorizontal } from "lucide-react";
 import { ResponsiveContainer, BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, ReferenceLine } from "recharts";
 import type { CategoryBarPoint } from "@/types";
+import type { HeaderItem } from "@/data/mock";
 
 export function CategoryCard({
   title,
   onExpand,
   data,
+  header,
 }: {
   title: string;
   onExpand: () => void;
   data: CategoryBarPoint[];
+  header?: HeaderItem[];
 }) {
   return (
     <div className="relative group cursor-pointer shadow-sm">
@@ -41,19 +44,17 @@ export function CategoryCard({
           <div className="text-[11px] text-black font-bold mb-2">Plants by key levers and impact</div>
           
           {/* KPI Metrics */}
-          <div className="flex justify-between mb-4">
-            <div className="text-center flex-1">
-              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">Regional spend</div>
-              <div className="text-[11px] font-medium text-gray-900">12.3M</div>
-            </div>
-            <div className="text-center flex-1">
-              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">On time delivery rate</div>
-              <div className="text-[11px] font-medium text-gray-900">46.8%</div>
-            </div>
-            <div className="text-center flex-1">
-              <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">Contract compliance</div>
-              <div className="text-[11px] font-medium text-gray-900">21 days</div>
-            </div>
+          <div className="flex justify-between mb-4 text-left">
+            {(header ?? [
+              { label: "Regional spend", value: "12.3M" },
+              { label: "On time delivery rate", value: "46.8%" },
+              { label: "Contract compliance", value: "21 days" },
+            ]).map((h, idx) => (
+              <div key={h.label} className={`flex-1 ${idx !== 0 ? 'pl-4 border-l border-gray-200' : ''}`}>
+                <div className="text-[9px] text-gray-500 mb-0.5 whitespace-nowrap">{h.label}</div>
+                <div className="text-[11px] font-semibold text-gray-900">{h.value}</div>
+              </div>
+            ))}
           </div>
           
           {/* Chart Container */}
