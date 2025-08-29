@@ -81,28 +81,27 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
         {/* Left Section - Horizontal Bar Chart */}
         <div className="space-y-6">
                       {/* Horizontal Bar Chart */}
-            <div className="bg-white p-4 flex flex-col min-h-70">
-              <div className="grid grid-cols-3 gap-2 pb-4 mb-6 bg-red-100">
+            <div className="bg-white p-4 flex flex-col min-h-60">
+              <div className="flex pb-4 mb-6" style={{gap: '0px'}}>
                 {/* Total Spend */}
-                <div className="text-left">
+                <div className="text-left" style={{width: '33.33%'}}>
                   <p className="text-[10px] text-gray-500 mb-0.5">Total spend</p>
                   <p className="text-base font-semibold text-gray-900">10.9M</p>
                 </div>
 
                 {/* Category Volatility */}
-                <div className="text-left border-l border-gray-200 pl-2">
+                <div className="text-left border-l border-gray-200 pl-2" style={{width: '33.33%'}}>
                   <p className="text-[10px] text-gray-500 mb-0.5">Category volatility</p>
                   <p className="text-base font-semibold text-gray-900">32%</p>
                 </div>
 
                 {/* Spend Link to Indexes */}
-                <div className="text-left border-l border-gray-200 pl-2">
+                <div className="text-left border-l border-gray-200 pl-2" style={{width: '33.33%'}}>
                   <p className="text-[10px] text-gray-500 mb-0.5">Spend link to indexes</p>
                   <p className="text-base font-semibold text-gray-900">7.07M</p>
                 </div>
               </div>
-              <div className="flex-1" />
-              <div className="text-sm font-medium mb-4">Spend by top 10 suppliers influencing your portfolio:</div>
+              <div className="text-sm font-medium mb-8 mt-8">Spend by top 10 suppliers influencing your portfolio:</div>
               
               {/* Segmented Horizontal Bar */}
               <div className="mb-4">
@@ -205,9 +204,9 @@ export function DetailView({ onBack, sectionTitle }: { onBack: () => void; secti
         </div>
 
         {/* Right Section - Market Mix Index Line Chart */}
-        <div className="bg-white p-4 min-h-60">
+        <div className="bg-white p-4 min-h-56">
           <div className="text-sm font-medium mb-4">Market mix index</div>
-          <div className="h-54">
+          <div className="h-50">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={series} margin={{ top: 10, right: 8, left: 0, bottom: 28 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
